@@ -28,11 +28,11 @@ public class ElementosViewModel extends AndroidViewModel {
         return listaElementos;
     }
 
-    void establecerElementoSeleccionado(Elemento elemento){
+    void seleccionar(Elemento elemento){
         elementoSeleccionado.setValue(elemento);
     }
 
-    void insertarElemento(Elemento elemento){
+    void insertar(Elemento elemento){
         elementosRepositorio.insertar(elemento, new ElementosRepositorio.Callback() {
             @Override
             public void cuandoFinalice(List<Elemento> elementos) {
@@ -41,7 +41,7 @@ public class ElementosViewModel extends AndroidViewModel {
         });
     }
 
-    void eliminarElemento(Elemento elemento){
+    void eliminar(Elemento elemento){
         elementosRepositorio.eliminar(elemento, new ElementosRepositorio.Callback() {
             @Override
             public void cuandoFinalice(List<Elemento> elementos) {
@@ -50,7 +50,7 @@ public class ElementosViewModel extends AndroidViewModel {
         });
     }
 
-    void actualizarValoracionElemento(Elemento elemento, float valoracion){
-        elementosRepositorio.actualizarValoracion(elemento, valoracion);
+    void actualizar(Elemento elemento, float valoracion){
+        elementosRepositorio.actualizar(elemento, valoracion);
     }
 }
