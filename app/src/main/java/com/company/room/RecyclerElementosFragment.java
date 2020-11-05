@@ -52,7 +52,7 @@ public class RecyclerElementosFragment extends Fragment {
 
         binding.recycler.setAdapter(elementosAdapter);
 
-        binding.recycler.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        binding.recycler.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
                 ItemTouchHelper.UP | ItemTouchHelper.DOWN,
@@ -67,7 +67,7 @@ public class RecyclerElementosFragment extends Fragment {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int posicion = viewHolder.getAdapterPosition();
                 Elemento elemento = elementosAdapter.obtenerElemento(posicion);
-                elementosViewModel.eliminarElemento(elemento);
+                elementosViewModel.eliminar(elemento);
 
             }
         }).attachToRecyclerView(binding.recycler);
@@ -102,7 +102,7 @@ public class RecyclerElementosFragment extends Fragment {
                 @Override
                 public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                     if(fromUser) {
-                        elementosViewModel.actualizarValoracionElemento(elemento, rating);
+                        elementosViewModel.actualizar(elemento, rating);
                     }
                 }
             });
@@ -110,7 +110,7 @@ public class RecyclerElementosFragment extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    elementosViewModel.establecerElementoSeleccionado(elemento);
+                    elementosViewModel.seleccionar(elemento);
                     navController.navigate(R.id.action_recyclerElementosFragment_to_mostrarElementoFragment);
                 }
             });
