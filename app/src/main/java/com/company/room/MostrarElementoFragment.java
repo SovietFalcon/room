@@ -40,7 +40,7 @@ public class MostrarElementoFragment extends Fragment {
                     @Override
                     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                         if(fromUser){
-                            elementosViewModel.actualizarValoracionElemento(elemento, rating);
+                            elementosViewModel.actualizar(elemento, rating);
                         }
                     }
                 });
