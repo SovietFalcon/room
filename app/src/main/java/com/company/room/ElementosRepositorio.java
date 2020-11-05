@@ -31,7 +31,7 @@ public class ElementosRepositorio {
         callback.cuandoFinalice(elementos);
     }
 
-    public void actualizarValoracion(Elemento elemento, float valoracion) {
+    public void actualizar(Elemento elemento, float valoracion) {
         elemento.valoracion = valoracion;
     }
 }
