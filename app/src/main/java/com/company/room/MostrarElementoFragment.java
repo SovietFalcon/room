@@ -29,7 +29,7 @@ public class MostrarElementoFragment extends Fragment {
 
         ElementosViewModel elementosViewModel = new ViewModelProvider(requireActivity()).get(ElementosViewModel.class);
 
-        elementosViewModel.elementoSeleccionado.observe(getViewLifecycleOwner(), new Observer<Elemento>() {
+        elementosViewModel.seleccionado().observe(getViewLifecycleOwner(), new Observer<Elemento>() {
             @Override
             public void onChanged(Elemento elemento) {
                 binding.nombre.setText(elemento.nombre);
