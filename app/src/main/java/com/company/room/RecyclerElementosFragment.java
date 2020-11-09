@@ -50,9 +50,9 @@ public class RecyclerElementosFragment extends Fragment {
 
         ElementosAdapter elementosAdapter = new ElementosAdapter();
 
-        binding.recycler.setAdapter(elementosAdapter);
+        binding.recyclerView.setAdapter(elementosAdapter);
 
-        binding.recycler.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+        binding.recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
                 ItemTouchHelper.UP | ItemTouchHelper.DOWN,
@@ -70,7 +70,7 @@ public class RecyclerElementosFragment extends Fragment {
                 elementosViewModel.eliminar(elemento);
 
             }
-        }).attachToRecyclerView(binding.recycler);
+        }).attachToRecyclerView(binding.recyclerView);
 
         elementosViewModel.obtener().observe(getViewLifecycleOwner(), new Observer<List<Elemento>>() {
             @Override

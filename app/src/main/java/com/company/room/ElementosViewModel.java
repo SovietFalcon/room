@@ -12,7 +12,7 @@ public class ElementosViewModel extends AndroidViewModel {
 
     ElementosRepositorio elementosRepositorio;
 
-    MutableLiveData<List<Elemento>> listaElementos = new MutableLiveData<>();
+    MutableLiveData<List<Elemento>> listElementosMutableLiveData = new MutableLiveData<>();
     MutableLiveData<Elemento> elementoSeleccionado = new MutableLiveData<>();
 
     public ElementosViewModel(@NonNull Application application) {
@@ -20,19 +20,19 @@ public class ElementosViewModel extends AndroidViewModel {
 
         elementosRepositorio = new ElementosRepositorio();
 
-        listaElementos.setValue(elementosRepositorio.elementos);
+        listElementosMutableLiveData.setValue(elementosRepositorio.obtener());
     }
 
 
     MutableLiveData<List<Elemento>> obtener(){
-        return listaElementos;
+        return listElementosMutableLiveData;
     }
 
     void insertar(Elemento elemento){
         elementosRepositorio.insertar(elemento, new ElementosRepositorio.Callback() {
             @Override
             public void cuandoFinalice(List<Elemento> elementos) {
-                listaElementos.setValue(elementos);
+                listElementosMutableLiveData.setValue(elementos);
             }
         });
     }
@@ -41,13 +41,18 @@ public class ElementosViewModel extends AndroidViewModel {
         elementosRepositorio.eliminar(elemento, new ElementosRepositorio.Callback() {
             @Override
             public void cuandoFinalice(List<Elemento> elementos) {
-                listaElementos.setValue(elementos);
+                listElementosMutableLiveData.setValue(elementos);
             }
         });
     }
 
     void actualizar(Elemento elemento, float valoracion){
-        elementosRepositorio.actualizar(elemento, valoracion);
+        elementosRepositorio.actualizar(elemento, valoracion, new ElementosRepositorio.Callback() {
+            @Override
+            public void cuandoFinalice(List<Elemento> elementos) {
+                listElementosMutableLiveData.setValue(elementos);
+            }
+        });
     }
 
     void seleccionar(Elemento elemento){
