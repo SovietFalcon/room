@@ -29,22 +29,16 @@ public class MostrarElementoFragment extends Fragment {
 
         ElementosViewModel elementosViewModel = new ViewModelProvider(requireActivity()).get(ElementosViewModel.class);
 
-        elementosViewModel.seleccionado().observe(getViewLifecycleOwner(), new Observer<Elemento>() {
-            @Override
-            public void onChanged(Elemento elemento) {
-                binding.nombre.setText(elemento.nombre);
-                binding.descripcion.setText(elemento.descripcion);
-                binding.valoracion.setRating(elemento.valoracion);
+        elementosViewModel.seleccionado().observe(getViewLifecycleOwner(), elemento -> {
+            binding.nombre.setText(elemento.nombre);
+            binding.descripcion.setText(elemento.descripcion);
+            binding.valoracion.setRating(elemento.valoracion);
 
-                binding.valoracion.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-                    @Override
-                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                        if(fromUser){
-                            elementosViewModel.actualizar(elemento, rating);
-                        }
-                    }
-                });
-            }
+            binding.valoracion.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+                if(fromUser){
+                    elementosViewModel.actualizar(elemento, rating);
+                }
+            });
         });
     }
 }
